@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(to right, #00274c, #ffcb05);
+}
+
+.game-container {
+  text-align: center;
+  padding-top: 50px;
+}
+
+h1 {
+  color: white;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.alert-title {
+  font-size: 45px;
+  color: #ffcb05;
+}
+
+.centered-image {
+  margin: 20px auto;
+  display: block;
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.choices-list button,
+.next-button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f6f6f6;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1);
+  transition: all 0.3s ease;
+  border-color: #00274c;
+  background-color: #ffcb05;
+  color: #00274c;
+}
+
+.choices-list button:hover,
+.next-button:hover {
+  background-color: #ffa600;
+  transform: scale(1.05);
+}
+
+.choices-list button:active,
+.next-button:active {
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98);
+}
+
+.choices-list button.correct {
+  background-color: #a5d6a7;
+}
+
+.choices-list button.wrong {
+  background-color: #ef9a9a;
+}
+
+.points {
+  margin-top: 20px;
+  font-size: 20px;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.score-output {
+  margin-top: 100px;
+  padding: 30px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 1s ease-out;
+}
+
+.score-output button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f6f6f6;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1);
+  transition: all 0.3s ease;
+}
+
+.score-output button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.score-output button:active {
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98);
+}
+
+.start-screen {
+  text-align: center;
+  padding-top: 100px;
+  background-color: rgba(0, 39, 76, 0.7);
+  border-radius: 15px;
+  margin: 20px;
+  color: #ffcb05;
+}
+
+.progress-container {
+  background: #ffcb05;
+  border-radius: 12px;
+  height: 20px;
+  margin: 20px 0;
+}
+
+.progress-bar {
+  background: #00274c;
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.5s;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+}
+
+button {
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
