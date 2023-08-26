@@ -1,32 +1,9 @@
 import React, { useState, useEffect } from "react";
-import abhipol_Vibhatasilpin from "./assets/abhipol_Vibhatasilpin.jpg";
-import Alanson_Sample from "./assets/Alanson_Sample.jpeg";
-import Cameron_Haire from "./assets/Cameron_Haire.jpeg";
-import Christina_Solomon from "./assets/Christina_Solomon.jpg";
-import Hyunmin_Park from "./assets/Hyunmin_Park.jpg";
-import Kunpeng_Huang from "./assets/Kunpeng_Huang.jpg";
-import Raghav_Varshney from "./assets/Raghav_Varshney.jpg";
-import Tianyuan_Du from "./assets/Tianyuan_Du.jpg";
-import Tom_Krolikowski from "./assets/Tom_Krolikowski.jpg";
-import Yang_Hsi_Su from "./assets/Yang-Hsi_Su.jpg";
-import Yasha_Iravantchi from "./assets/Yasha_Iravantchi.jpg";
-import Yaxuan_Li from "./assets/Yaxuan_Li.jpg";
+import { useNavigate } from "react-router-dom";
+import students from "./data";
+import { useAuthInfo } from "./auth";
 
-const students = [
-  { id: 1, name: "Abhipol Vibhatasilpin", photoUrl: abhipol_Vibhatasilpin },
-  { id: 2, name: "Alanson Sample", photoUrl: Alanson_Sample },
-  { id: 3, name: "Cameron Haire", photoUrl: Cameron_Haire },
-  { id: 4, name: "Christina Solomon", photoUrl: Christina_Solomon },
-  { id: 5, name: "Hyunmin Park", photoUrl: Hyunmin_Park },
-  { id: 6, name: "Kunpeng Huang", photoUrl: Kunpeng_Huang },
-  { id: 7, name: "Raghav Varshney", photoUrl: Raghav_Varshney },
-  { id: 8, name: "Tianyuan Du", photoUrl: Tianyuan_Du },
-  { id: 9, name: "Tom Krolikowski", photoUrl: Tom_Krolikowski },
-  { id: 10, name: "Yang Hsi Su", photoUrl: Yang_Hsi_Su },
-  { id: 11, name: "Yasha Iravantchi", photoUrl: Yasha_Iravantchi },
-  { id: 12, name: "Yaxuan Li", photoUrl: Yaxuan_Li },
-];
-
+//Sheffling the choices
 function shuffleArray(array) {
   let shuffled = array.slice();
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -36,6 +13,7 @@ function shuffleArray(array) {
   return shuffled;
 }
 
+// Get the feedback based on the score
 const getScoreFeedback = (score, total) => {
   const percentage = (score / total) * 100;
 
@@ -46,6 +24,7 @@ const getScoreFeedback = (score, total) => {
   return { feedback: "Keep trying", emoji: "🙁" };
 };
 
+// send data to google sheets
 const postDataToGoogleSheets = async (playerName, playerID, points) => {
   const endpoint =
     "https://script.google.com/macros/s/AKfycbyLsnQc7nnePzgSU3aNCdrbtBTHvtOrub0FvoksMc7kVc7LXVYjl9Us8usyuMY1uOT6hw/exec"; // Use the URL provided
@@ -61,6 +40,7 @@ const postDataToGoogleSheets = async (playerName, playerID, points) => {
     });
 
     if (response.ok) {
+      console.log(response);
       console.log("Data successfully saved to Google Sheets");
     } else {
       console.error(
@@ -73,47 +53,17 @@ const postDataToGoogleSheets = async (playerName, playerID, points) => {
   }
 };
 
-const fetchDataFromGoogleSheets = async () => {
-  const endpoint =
-    "https://script.google.com/macros/s/AKfycbyLsnQc7nnePzgSU3aNCdrbtBTHvtOrub0FvoksMc7kVc7LXVYjl9Us8usyuMY1uOT6hw/exec"; // Replace this with your endpoint
-  try {
-    const response = await fetch(endpoint);
-    if (response.ok) {
-      const data = await response.json();
-      return data.names || [];
-    } else {
-      console.error("Error fetching data:", response.statusText);
-      return [];
-    }
-  } catch (error) {
-    console.error("There was an error fetching from Google Sheets", error);
-    return [];
-  }
-};
-
-function MatchingGame() {
+function MatchingGame({ playerName, playerID }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(null);
   const [choices, setChoices] = useState([]);
   const [selected, setSelected] = useState(null);
   const [points, setPoints] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
-  const [playerName, setPlayerName] = useState(""); // State for player's name
-  const [playerID, setPlayerID] = useState(""); // State for player's ID
-  const [scoreHistory, setScoreHistory] = useState([]); // State for score history
-  const [isGameStarted, setIsGameStarted] = useState(false); // State to check if the game is started
-  const [isNameInSheet, setIsNameInSheet] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [showSticker, setShowSticker] = useState(false);
 
-  useEffect(() => {
-    setProgress((currentIndex / students.length) * 100);
-  }, [currentIndex]);
-
-  const validateNameAndId = () => {
-    if (playerName.length <= 20 && /^(\d+)?$/.test(playerID)) {
-      handleNameSubmit();
-    }
-  };
+  const navigate = useNavigate();
+  const { user } = useAuthInfo();
 
   useEffect(() => {
     setCurrentImage(students[currentIndex]);
@@ -127,6 +77,10 @@ function MatchingGame() {
     setChoices(shuffledChoices);
   }, [currentIndex]);
 
+  const handleLogout = () => {
+    navigate("/");
+  };
+
   const handleChoice = (choice) => {
     if (selected) return;
 
@@ -134,9 +88,11 @@ function MatchingGame() {
 
     if (choice.id === currentImage.id) {
       setPoints((prev) => prev + 1);
+      setShowSticker(true);
+      setTimeout(() => setShowSticker(false), 1000);
     }
     // Immediately move to the next question
-    setTimeout(handleNext, 1500);
+    setTimeout(handleNext, 1000);
   };
 
   const handleNext = () => {
@@ -155,94 +111,66 @@ function MatchingGame() {
     setIsGameOver(false);
   };
 
-  const handleSubmit = async () => {
-    postDataToGoogleSheets(playerName, playerID, points);
-    // Record the score when the game is over
-    setScoreHistory((prevHistory) => [
-      ...prevHistory,
-      { name: playerName, score: points },
-    ]);
-    setIsGameOver(true); // Reset the game over state
-    setIsGameStarted(false); // Return to the game start screen
-    setPlayerName(""); // Reset player's name
-    setPlayerID(""); // Reset player's ID
-    setCurrentIndex(0);
-    setSelected(null);
-    setPoints(0);
+  // write a handle subimt function
+  const handleSubmit = () => {
+    postDataToGoogleSheets(user.playerName, user.playerID, points);
+    handleLogout();
   };
-
-  const handleNameSubmit = async () => {
-    const namesFromSheet = await fetchDataFromGoogleSheets();
-
-    if (namesFromSheet.includes(playerName)) {
-      setIsNameInSheet(true);
-    } else {
-      setIsGameStarted(true);
-    }
-  };
-
-  if (!isGameStarted) {
-    return (
-      <div className="start-screen">
-        <h1>Welcome to SAMPLE ALERT!</h1>
-        <input
-          value={playerName}
-          onChange={(e) => setPlayerName(e.target.value)}
-          placeholder="Enter your Uniqname"
-        />
-        <input
-          value={playerID}
-          onChange={(e) => setPlayerID(e.target.value)}
-          placeholder="Enter your UMID"
-        />
-        {isNameInSheet && <p>Your response has already been submitted.</p>}
-        <button onClick={validateNameAndId}>Start Game</button>
-      </div>
-    );
-  }
 
   if (isGameOver) {
     const feedback = getScoreFeedback(points, students.length);
+    const percentage = Math.round((points / students.length) * 100);
 
     return (
-      <div className="game-container">
+      <div className="score-container">
         <div className="score-output">
           Your score is: {points} out of {students.length}
-          <br />
-          {feedback.feedback} {feedback.emoji}
+          <br></br>
+          <div style={{ color: "blue", marginTop: "10px" }}>{percentage}%!</div>
+          <div className="feedback">
+            <span className="feedback-text">{feedback.feedback}</span>
+            <span className="emoji">{feedback.emoji}</span>
+          </div>
           <br />
           <button onClick={() => handleRetry()}>Retry</button>{" "}
-          {/* The Retry Button */}
           <button onClick={() => handleSubmit()}>Submit</button>{" "}
-          {/* The Submit Button */}
-        </div>
-        <div>
-          <h2>Score History</h2>
-          <ul>
-            {scoreHistory.map((record, idx) => (
-              <li key={idx}>
-                {record.name}: {record.score} out of {students.length}
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     );
   }
   return (
     <div className="game-container">
-      <h1>🎓 Guess the Student 🤔</h1>
-      <div className="progress-container">
-        <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+      <div className="header">
+        <div className="player-info">
+          <span className="player-name">
+            <span className="label">Uniqname:</span>
+            {user.playerName}
+          </span>
+          <span className="player-id">
+            <span className="label">UMID:</span> #{user.playerID}
+          </span>
+        </div>
+
+        <div className="logout-button" onClick={handleLogout}>
+          Logout
+        </div>
       </div>
 
-      {currentImage && (
-        <img
-          src={currentImage.photoUrl}
-          alt="Guess Who?"
-          className="centered-image"
-        />
-      )}
+      <h1>🎓 Guess the Student 🤔 </h1>
+      <div className="counter">
+        {currentIndex + 1}/{students.length}
+      </div>
+
+      <div className="image-container">
+        {showSticker && <div className="sticker">+1</div>}
+        {currentImage && (
+          <img
+            src={currentImage.photoUrl}
+            alt="Guess Who?"
+            className="centered-image"
+          />
+        )}
+      </div>
       <div className="choices-list">
         {choices.map((choice) => (
           <button
@@ -262,8 +190,21 @@ function MatchingGame() {
           </button>
         ))}
       </div>
-
-      <div className="points">Points: {points}</div>
+      <div className="points">
+        Points:{" "}
+        <span
+          style={{
+            color: "white",
+            padding: "10px 15px",
+            borderRadius: "20px",
+            boxShadow: "0px 2px 5px rgba(0,0,0,0.1)",
+            fontSize: "1.2em",
+            fontWeight: "600",
+          }}
+        >
+          {points}
+        </span>
+      </div>
     </div>
   );
 }

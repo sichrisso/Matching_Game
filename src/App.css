@@ -6,7 +6,7 @@ body {
 
 .game-container {
   text-align: center;
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 h1 {
@@ -15,16 +15,11 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.alert-title {
-  font-size: 45px;
-  color: #ffcb05;
-}
-
 .centered-image {
   margin: 20px auto;
   display: block;
-  width: 300px;
-  height: 400px;
+  width: 350px;
+  height: 450px;
   object-fit: cover;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -54,15 +49,12 @@ h1 {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   transform: scale(1);
   transition: all 0.3s ease;
-  border-color: #00274c;
-  background-color: #ffcb05;
-  color: #00274c;
 }
 
 .choices-list button:hover,
 .next-button:hover {
-  background-color: #ffa600;
-  transform: scale(1.05);
+  background-color: #e0e0e0;
+  transform: scale(1.1);
 }
 
 .choices-list button:active,
@@ -79,6 +71,12 @@ h1 {
   background-color: #ef9a9a;
 }
 
+.counter {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
 .points {
   margin-top: 20px;
   font-size: 20px;
@@ -86,30 +84,35 @@ h1 {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+.score-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* makes sure the container fills the viewport height */
+}
+
 .score-output {
-  margin-top: 100px;
+  background: rgba(255, 255, 255, 0.7); /* slightly transparent white */
   padding: 30px;
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   font-size: 24px;
+  width: 400px;
   font-weight: bold;
-  color: #333;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  border-radius: 15px; /* rounded corners */
   animation: fadeIn 1s ease-out;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* shadow for depth */
 }
 
 .score-output button {
-  margin-top: 20px;
+  margin-top: 25px;
+  margin-left: 15px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   border: 1px solid #ccc;
   background-color: #f6f6f6;
-  border-radius: 20px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   transform: scale(1);
   transition: all 0.3s ease;
 }
@@ -124,30 +127,34 @@ h1 {
   transform: scale(0.98);
 }
 
+.start-parent {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  height: 100vh; /* Full viewport height */
+  margin: 0; /* Remove default margin */
+}
+
 .start-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   text-align: center;
-  padding-top: 100px;
-  background-color: rgba(0, 39, 76, 0.7);
+  padding: 50px;
   border-radius: 15px;
-  margin: 20px;
-  color: #ffcb05;
 }
 
-.progress-container {
-  background: #ffcb05;
-  border-radius: 12px;
-  height: 20px;
-  margin: 20px 0;
-}
-
-.progress-bar {
-  background: #00274c;
-  height: 100%;
-  border-radius: 12px;
-  transition: width 0.5s;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 input {
+  width: 300px;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border-radius: 5px;
@@ -167,4 +174,162 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.player-info,
+.room-info {
+  flex: 1;
+}
+
+.player-info span {
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.counter {
+  text-align: center;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+.points {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-top: 20px;
+  color: white; /* dark gray text color for contrast */
+  padding: 10px; /* spacing inside the box */
+  border-radius: 15px; /* slightly rounded corners */
+  display: inline-block; /* align to the center */
+  transition: all 0.3s ease; /* transition for hover effects */
+}
+
+@keyframes popOut {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.sticker {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  background-color: #f39c12;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 1.5em;
+  font-weight: bold;
+  animation: popOut 1s forwards;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.feedback {
+  font-size: 1.5em; /* making it larger than surrounding text */
+  margin-top: 20px; /* spacing from the score */
+  display: flex;
+  align-items: center; /* vertically aligns the emoji with the text */
+  justify-content: center;
+  position: relative;
+}
+
+@keyframes tiltRightAndLeft {
+  0%,
+  100% {
+    transform: skewX(0deg);
+  }
+  50% {
+    transform: skewX(10deg); /* tilt to the right */
+  }
+}
+
+.feedback-text {
+  margin-right: 10px; /* space between feedback and emoji */
+  color: #2c3e50; /* dark blue color, you can change this */
+  padding: 5px 15px;
+  border-radius: 5px; /* rounded corners */
+  animation: tiltRightAndLeft 2s infinite; /* 1s duration, infinite repeat */
+}
+
+.emoji {
+  font-size: 2em;
+  animation: sparkle 1.5s infinite;
+  display: inline-block; /* To apply animation */
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.5);
+    opacity: 1;
+  }
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-name {
+  color: white; /* Choose your desired color */
+  margin-bottom: 5px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.label {
+  font-size: x-large;
+  font-weight: bold;
+  color: #ff5733; /* Choose your desired color for the labels */
+  margin-right: 5px;
+}
+
+.player-id {
+  color: white; /* Choose your desired color */
+  text-align: left;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  border-bottom: 1px solid #ddd;
+}
+
+.logout-button {
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  background-color: #333333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  transition: background-color 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #555555;
 }

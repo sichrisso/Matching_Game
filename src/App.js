@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import MatchingGame from "./MatchingGame";
 import "./App.css";
-// import Form from "./Form";
+import StartScreen from "./Login";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./auth";
 
 function App() {
   return (
-    <div className="App">
-      <MatchingGame />
-      {/* <Form /> */}
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<StartScreen />} />
+            <Route path="/matchingGame" element={<MatchingGame />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
