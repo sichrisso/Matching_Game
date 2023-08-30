@@ -120,10 +120,21 @@ const StartScreen = () => {
               {formik.errors.playerID}
             </div>
           ) : null}
+          {formik.isSubmitting ? (
+            <p>Checking if your response has already been submitted...</p>
+          ) : null}
 
-          {isNameInSheet && <p>Your response has already been submitted.</p>}
+          {formik.status && <p>{formik.status}</p>}
+          {/* {isNameInSheet && <p>Your response has already been submitted.</p>}
           <button style={{ color: "white" }} type="submit">
             Start Game
+          </button> */}
+          <button
+            style={{ color: "white" }}
+            type="submit"
+            disabled={formik.isSubmitting}
+          >
+            {formik.isSubmitting ? "Checking..." : "Start Game"}
           </button>
         </form>
       </div>
