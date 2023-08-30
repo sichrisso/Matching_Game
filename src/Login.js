@@ -57,6 +57,7 @@ const StartScreen = () => {
     );
 
     if (exists) {
+      alert("Your response has already been submitted.");
       setIsNameInSheet(true);
     } else {
       setIsNameInSheet(false);
