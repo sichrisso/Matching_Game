@@ -27,7 +27,7 @@ const getScoreFeedback = (score, total) => {
 // send data to google sheets
 const postDataToGoogleSheets = async (playerName, playerID, points) => {
   const endpoint =
-    "https://script.google.com/macros/s/AKfycbyLsnQc7nnePzgSU3aNCdrbtBTHvtOrub0FvoksMc7kVc7LXVYjl9Us8usyuMY1uOT6hw/exec"; // Use the URL provided
+    "https://script.google.com/macros/s/AKfycby2wf-DQEJiiBTmT_YTWoPW8HPTMI0PBZu6jb812PbTlUUXEj3Od-GDhVjQO_nQ9-Heag/exec"; // Use the URL provided
   const formData = new FormData();
   formData.append("Name", playerName);
   formData.append("ID", playerID.toString()); // Append the player's ID

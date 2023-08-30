@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuthInfo } from "./auth";
 
 const fetchDataFromGoogleSheets = async () => {
   const endpoint =
-    "https://script.google.com/macros/s/AKfycbyLsnQc7nnePzgSU3aNCdrbtBTHvtOrub0FvoksMc7kVc7LXVYjl9Us8usyuMY1uOT6hw/exec"; // Replace this with your endpoint
+    "https://script.google.com/macros/s/AKfycby2wf-DQEJiiBTmT_YTWoPW8HPTMI0PBZu6jb812PbTlUUXEj3Od-GDhVjQO_nQ9-Heag/exec"; // Replace this with your endpoint
   try {
     const response = await fetch(endpoint, { method: "GET", mode: "cors" });
     if (response.ok) {
@@ -59,6 +59,7 @@ const StartScreen = () => {
     if (exists) {
       setIsNameInSheet(true);
     } else {
+      setIsNameInSheet(false);
       setUserInfo(values.playerName, values.playerID);
       navigate("/matchingGame");
     }
