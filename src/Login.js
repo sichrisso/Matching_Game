@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -6,13 +6,13 @@ import { useAuthInfo } from "./auth";
 
 const fetchDataFromGoogleSheets = async () => {
   const endpoint =
-    "https://script.google.com/macros/s/AKfycby2wf-DQEJiiBTmT_YTWoPW8HPTMI0PBZu6jb812PbTlUUXEj3Od-GDhVjQO_nQ9-Heag/exec"; // Replace this with your endpoint
+    "https://script.google.com/macros/s/AKfycbwuzG9FUWbL2c5KzvZpQQhKFVeSgA6V1O0TtqXiEMmtYsVubPDhVMOE6xxqsKRn62_f/exec"; // Replace this with your endpoint
   try {
     const response = await fetch(endpoint, { method: "GET", mode: "cors" });
     if (response.ok) {
       console.log(response);
       const data = await response.json();
-      return data.names || [];
+      return data || [];
     } else {
       console.error("Error fetching data:", response.statusText);
       return [];
@@ -24,7 +24,6 @@ const fetchDataFromGoogleSheets = async () => {
 };
 
 const StartScreen = () => {
-  const [isNameInSheet, setIsNameInSheet] = useState(false);
   const { setUserInfo } = useAuthInfo();
 
   const navigate = useNavigate();
@@ -43,27 +42,52 @@ const StartScreen = () => {
         .matches(/^\d{8}$/, "UMID should be a number with exactly 8 digits"),
     }),
     onSubmit: (values) => {
-      handleSubmit(values);
+      if (formik.isValid) {
+        handleSubmit(values);
+      }
     },
   });
 
   const handleSubmit = async (values) => {
+    formik.setSubmitting(true); // Set isSubmitting to true when you start submitting
+
     const namesFromSheet = await fetchDataFromGoogleSheets();
 
     const exists = namesFromSheet.some(
       (entry) =>
-        entry.playerName === values.playerName &&
-        entry.playerID === values.playerID
+        entry.Name === values.playerName && entry.ID === Number(values.playerID)
     );
 
     if (exists) {
-      alert("Your response has already been submitted.");
-      setIsNameInSheet(true);
+      // Create a modal overlay
+      const modalOverlay = document.createElement("div");
+      modalOverlay.classList.add("modal-overlay");
+      document.body.appendChild(modalOverlay);
+      // Create a centered alert dialog
+      const alertContainer = document.createElement("div");
+      alertContainer.classList.add("centered-alert");
+
+      const alertMessage = document.createElement("p");
+      alertMessage.textContent = "Your response has already been submitted.";
+
+      const okButton = document.createElement("button");
+      okButton.textContent = "OK";
+      okButton.classList.add("centered-button");
+      okButton.addEventListener("click", () => {
+        document.body.removeChild(modalOverlay); // Remove the modal overlay
+        document.body.removeChild(alertContainer); // Remove the alert on OK button click
+      });
+
+      alertContainer.appendChild(alertMessage);
+      alertContainer.appendChild(okButton);
+      document.body.appendChild(alertContainer);
     } else {
-      setIsNameInSheet(false);
       setUserInfo(values.playerName, values.playerID);
       navigate("/matchingGame");
     }
+
+    formik.setSubmitting(false); // Set isSubmitting to false when you finish submitting
+    formik.resetForm(); // Clear the form fields after successful submission
   };
 
   return (
@@ -125,15 +149,13 @@ const StartScreen = () => {
           ) : null}
 
           {formik.status && <p>{formik.status}</p>}
-          {/* {isNameInSheet && <p>Your response has already been submitted.</p>}
-          <button style={{ color: "white" }} type="submit">
-            Start Game
-          </button> */}
+
           <button
             style={{ color: "white" }}
             type="submit"
             disabled={formik.isSubmitting}
           >
+            {console.log(formik.isSubmitting)}
             {formik.isSubmitting ? "Checking..." : "Start Game"}
           </button>
         </form>
