@@ -14,16 +14,16 @@ import Yaxuan_Li from "./assets/Yaxuan_Li.jpg";
 const students = [
   { id: 1, name: "Abhipol Vibhatasilpin", photoUrl: abhipol_Vibhatasilpin },
   { id: 2, name: "Alanson Sample", photoUrl: Alanson_Sample },
-  // { id: 3, name: "Cameron Haire", photoUrl: Cameron_Haire },
-  // { id: 4, name: "Christina Solomon", photoUrl: Christina_Solomon },
-  // { id: 5, name: "Hyunmin Park", photoUrl: Hyunmin_Park },
-  // { id: 6, name: "Kunpeng Huang", photoUrl: Kunpeng_Huang },
-  // { id: 7, name: "Raghav Varshney", photoUrl: Raghav_Varshney },
-  // { id: 8, name: "Tianyuan Du", photoUrl: Tianyuan_Du },
-  // { id: 9, name: "Tom Krolikowski", photoUrl: Tom_Krolikowski },
-  // { id: 10, name: "Yang Hsi Su", photoUrl: Yang_Hsi_Su },
-  // { id: 11, name: "Yasha Iravantchi", photoUrl: Yasha_Iravantchi },
-  // { id: 12, name: "Yaxuan Li", photoUrl: Yaxuan_Li },
+  { id: 3, name: "Cameron Haire", photoUrl: Cameron_Haire },
+  { id: 4, name: "Christina Solomon", photoUrl: Christina_Solomon },
+  { id: 5, name: "Hyunmin Park", photoUrl: Hyunmin_Park },
+  { id: 6, name: "Kunpeng Huang", photoUrl: Kunpeng_Huang },
+  { id: 7, name: "Raghav Varshney", photoUrl: Raghav_Varshney },
+  { id: 8, name: "Tianyuan Du", photoUrl: Tianyuan_Du },
+  { id: 9, name: "Tom Krolikowski", photoUrl: Tom_Krolikowski },
+  { id: 10, name: "Yang Hsi Su", photoUrl: Yang_Hsi_Su },
+  { id: 11, name: "Yasha Iravantchi", photoUrl: Yasha_Iravantchi },
+  { id: 12, name: "Yaxuan Li", photoUrl: Yaxuan_Li },
 ];
 
 export default students;
