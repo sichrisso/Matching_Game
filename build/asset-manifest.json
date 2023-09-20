@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Matching_Game/static/css/main.88843979.css",
-    "main.js": "/Matching_Game/static/js/main.f2c627ad.js",
-    "static/media/Tianyuan_Du.jpg": "/Matching_Game/static/media/Tianyuan_Du.7342068242ff988195c6.jpg",
-    "static/media/Yang-Hsi_Su.jpg": "/Matching_Game/static/media/Yang-Hsi_Su.97b34a02e08f5889cf3e.jpg",
-    "static/media/Tom_Krolikowski.jpg": "/Matching_Game/static/media/Tom_Krolikowski.942047042c78c88bcfe9.jpg",
-    "static/media/Kunpeng_Huang.jpg": "/Matching_Game/static/media/Kunpeng_Huang.15dedf567fa0798e3184.jpg",
-    "static/media/Yasha_Iravantchi.jpg": "/Matching_Game/static/media/Yasha_Iravantchi.d5db977bfdd5bea42fc1.jpg",
-    "static/media/Alanson_Sample.jpeg": "/Matching_Game/static/media/Alanson_Sample.7fc3cba6e701661a19b3.jpeg",
-    "static/media/Cameron_Haire.jpeg": "/Matching_Game/static/media/Cameron_Haire.db486c19351510bbc9d4.jpeg",
-    "static/media/Christina_Solomon.jpg": "/Matching_Game/static/media/Christina_Solomon.12db232ddf937d9c0dc8.jpg",
-    "static/media/Yaxuan_Li.jpg": "/Matching_Game/static/media/Yaxuan_Li.bcbd859a6c1d18d7b7d2.jpg",
-    "static/media/abhipol_Vibhatasilpin.jpg": "/Matching_Game/static/media/abhipol_Vibhatasilpin.fbf4dc861e248dad81c2.jpg",
-    "static/media/Hyunmin_Park.jpg": "/Matching_Game/static/media/Hyunmin_Park.b5284af09a24d97a6e65.jpg",
-    "static/media/Raghav_Varshney.jpg": "/Matching_Game/static/media/Raghav_Varshney.c42baa0cc618a708bcac.jpg",
-    "index.html": "/Matching_Game/index.html",
-    "main.88843979.css.map": "/Matching_Game/static/css/main.88843979.css.map",
-    "main.f2c627ad.js.map": "/Matching_Game/static/js/main.f2c627ad.js.map"
+    "main.css": "/static/css/main.88843979.css",
+    "main.js": "/static/js/main.b130889a.js",
+    "static/media/Tianyuan_Du.jpg": "/static/media/Tianyuan_Du.7342068242ff988195c6.jpg",
+    "static/media/Yang-Hsi_Su.jpg": "/static/media/Yang-Hsi_Su.97b34a02e08f5889cf3e.jpg",
+    "static/media/Tom_Krolikowski.jpg": "/static/media/Tom_Krolikowski.942047042c78c88bcfe9.jpg",
+    "static/media/Kunpeng_Huang.jpg": "/static/media/Kunpeng_Huang.15dedf567fa0798e3184.jpg",
+    "static/media/Yasha_Iravantchi.jpg": "/static/media/Yasha_Iravantchi.d5db977bfdd5bea42fc1.jpg",
+    "static/media/Alanson_Sample.jpeg": "/static/media/Alanson_Sample.7fc3cba6e701661a19b3.jpeg",
+    "static/media/Cameron_Haire.jpeg": "/static/media/Cameron_Haire.db486c19351510bbc9d4.jpeg",
+    "static/media/Christina_Solomon.jpg": "/static/media/Christina_Solomon.12db232ddf937d9c0dc8.jpg",
+    "static/media/Yaxuan_Li.jpg": "/static/media/Yaxuan_Li.bcbd859a6c1d18d7b7d2.jpg",
+    "static/media/abhipol_Vibhatasilpin.jpg": "/static/media/abhipol_Vibhatasilpin.fbf4dc861e248dad81c2.jpg",
+    "static/media/Hyunmin_Park.jpg": "/static/media/Hyunmin_Park.b5284af09a24d97a6e65.jpg",
+    "static/media/Raghav_Varshney.jpg": "/static/media/Raghav_Varshney.c42baa0cc618a708bcac.jpg",
+    "index.html": "/index.html",
+    "main.88843979.css.map": "/static/css/main.88843979.css.map",
+    "main.b130889a.js.map": "/static/js/main.b130889a.js.map"
   },
   "entrypoints": [
     "static/css/main.88843979.css",
-    "static/js/main.f2c627ad.js"
+    "static/js/main.b130889a.js"
   ]
 }
