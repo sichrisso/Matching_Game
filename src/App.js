@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Routes>
-            <Route path="/" element={<StartScreen />} />
+            <Route path="/" element={<StartScreen />} exact/>
             <Route path="/matchingGame" element={<MatchingGame />} />
           </Routes>
         </div>
